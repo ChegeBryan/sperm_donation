@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sperm_donation/ui/auth/screens/login.dart';
 import 'package:sperm_donation/ui/auth/screens/register_donor.dart';
+import 'package:sperm_donation/ui/auth/screens/register_recipient.dart';
 
 class AuthPages extends StatelessWidget {
   final _controller = PageController(
@@ -14,6 +15,7 @@ class AuthPages extends StatelessWidget {
       children: [
         LoginScreen(),
         RegisterDonorScreen(),
+        RegisterRecipientScreen(),
       ],
     );
   }
