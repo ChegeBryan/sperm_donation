@@ -25,6 +25,7 @@ class _LoginFormState extends State<LoginForm> {
             decoration: InputDecoration(
               labelText: 'Email',
               prefixIcon: Icon(Icons.email_outlined),
+              border: OutlineInputBorder(),
             ),
             validator: (value) {
               if (value!.isEmpty) {
@@ -33,11 +34,15 @@ class _LoginFormState extends State<LoginForm> {
               return null;
             },
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+          ),
           TextFormField(
             controller: _password,
             decoration: InputDecoration(
               labelText: 'Password',
               prefixIcon: Icon(Icons.lock_outlined),
+              border: OutlineInputBorder(),
             ),
             obscureText: true,
             validator: (value) {
