@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sperm_donation/ui/auth/parts/form_bottom_text.dart';
-import 'package:sperm_donation/ui/auth/parts/login_form.dart';
-import 'package:sperm_donation/ui/auth/screens/register_donor.dart';
+import 'package:sperm_donation/ui/auth/parts/register_donor_form.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
-
+class RegisterDonorScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterDonorScreenState createState() => _RegisterDonorScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterDonorScreenState extends State<RegisterDonorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,10 +19,10 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                LoginForm(),
+                RegisterDonorForm(),
                 FormBottomText(
-                  message: "Don't have an account? Swipe right.",
-                  actionMessage: 'Create a new account',
+                  message: 'Are you a recipient? Swipe right',
+                  actionMessage: 'Create a recipient account',
                   swipeTo: RegisterDonorScreen(),
                 ),
               ],

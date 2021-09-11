@@ -5,12 +5,12 @@ class FormBottomText extends StatelessWidget {
     Key? key,
     required this.message,
     required this.actionMessage,
-    //required this.swipeTo,
+    required this.swipeTo,
   }) : super(key: key);
 
   final String? message;
   final String? actionMessage;
-  //final Widget? swipeTo;
+  final Widget? swipeTo;
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +22,23 @@ class FormBottomText extends StatelessWidget {
             fontSize: 16.0,
           ),
         ),
-        // TextButton(
-        //   onPressed: () {
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) => swipeTo!),
-        //     );
-        //   },
-        //   child: Text(
-        //     actionMessage!,
-        //     style: TextStyle(
-        //       fontSize: 16.0,
-        //     ),
-        //   ),
-        //   style: ButtonStyle(
-        //     overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
-        //   ),
-        // )
+        TextButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => swipeTo!),
+            );
+          },
+          child: Text(
+            actionMessage!,
+            style: TextStyle(
+              fontSize: 16.0,
+            ),
+          ),
+          style: ButtonStyle(
+            overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+          ),
+        )
       ],
     );
   }
