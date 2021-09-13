@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart';
 
-class RegisterDonorForm extends StatefulWidget {
-  const RegisterDonorForm({Key? key}) : super(key: key);
+class RegisterForm extends StatefulWidget {
+  const RegisterForm({Key? key}) : super(key: key);
 
   @override
-  _RegisterDonorFormState createState() => _RegisterDonorFormState();
+  _RegisterFormState createState() => _RegisterFormState();
 }
 
-class _RegisterDonorFormState extends State<RegisterDonorForm> {
+class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
@@ -22,7 +22,6 @@ class _RegisterDonorFormState extends State<RegisterDonorForm> {
         children: [
           Column(
             children: [
-              Text('Donor Registration'),
               TextFormField(
                 controller: _email,
                 keyboardType: TextInputType.emailAddress,
@@ -80,6 +79,32 @@ class _RegisterDonorFormState extends State<RegisterDonorForm> {
                   }
                   return null;
                 },
+              ),
+              Padding(padding: const EdgeInsets.all(8.0)),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SizedBox(),
+                      Text(
+                        'Register',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        size: 18,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

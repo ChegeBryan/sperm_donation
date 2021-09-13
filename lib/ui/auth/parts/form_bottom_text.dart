@@ -5,12 +5,12 @@ class FormBottomText extends StatelessWidget {
     Key? key,
     required this.message,
     required this.actionMessage,
-    required this.swipeTo,
+    required this.action,
   }) : super(key: key);
 
   final String? message;
   final String? actionMessage;
-  final Widget? swipeTo;
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class FormBottomText extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => swipeTo!),
+              MaterialPageRoute(builder: (context) => action!),
             );
           },
           child: Text(

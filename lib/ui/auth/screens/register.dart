@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sperm_donation/ui/auth/parts/form_bottom_text.dart';
-import 'package:sperm_donation/ui/auth/parts/login_form.dart';
-import 'package:sperm_donation/ui/auth/screens/register.dart';
+import 'package:sperm_donation/ui/auth/parts/register_form.dart';
+import 'package:sperm_donation/ui/auth/screens/login.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
-
+class RegisterScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +19,11 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              LoginForm(),
+              RegisterForm(),
               FormBottomText(
-                message: "Don't have an account?",
-                actionMessage: 'Create a new account',
-                action: RegisterScreen(),
+                message: 'Already have an account?',
+                actionMessage: 'Login',
+                action: LoginScreen(),
               ),
             ],
           ),

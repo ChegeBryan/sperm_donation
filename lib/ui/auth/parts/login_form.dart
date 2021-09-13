@@ -52,6 +52,21 @@ class _LoginFormState extends State<LoginForm> {
               return null;
             },
           ),
+          Padding(padding: const EdgeInsets.symmetric(vertical: 8.0)),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                'Login',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
