@@ -6,19 +6,22 @@ class UserPrefences {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setString('email', user.email!);
+    prefs.setString('userRole', user.role!);
   }
 
   Future<User> getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     String? email = prefs.getString('email');
+    String? userRole = prefs.getString('user_role');
 
-    return User(email: email);
+    return User(email: email, role: userRole);
   }
 
   Future<void> removeUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.remove("email");
+    prefs.remove('userRole');
   }
 }
