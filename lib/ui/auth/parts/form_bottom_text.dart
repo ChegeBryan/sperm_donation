@@ -10,7 +10,7 @@ class FormBottomText extends StatelessWidget {
 
   final String? message;
   final String? actionMessage;
-  final Widget? action;
+  final VoidCallback? action;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +23,7 @@ class FormBottomText extends StatelessWidget {
           ),
         ),
         TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => action!),
-            );
-          },
+          onPressed: action,
           child: Text(
             actionMessage!,
             style: TextStyle(

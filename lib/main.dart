@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sperm_donation/ui/auth/screens/login.dart';
+import 'package:sperm_donation/ui/auth/screens/register.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,6 +16,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: LoginScreen(),
+      routes: {
+        '/login': (context) => LoginScreen(),
+        '/register': (context) => RegisterScreen()
+      },
     );
   }
 }

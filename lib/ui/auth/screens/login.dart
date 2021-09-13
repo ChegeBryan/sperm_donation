@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sperm_donation/ui/auth/parts/form_bottom_text.dart';
 import 'package:sperm_donation/ui/auth/parts/login_form.dart';
-import 'package:sperm_donation/ui/auth/screens/register.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -25,7 +24,9 @@ class _LoginScreenState extends State<LoginScreen> {
               FormBottomText(
                 message: "Don't have an account?",
                 actionMessage: 'Create a new account',
-                action: RegisterScreen(),
+                action: () {
+                  Navigator.pushReplacementNamed(context, '/register');
+                },
               ),
             ],
           ),

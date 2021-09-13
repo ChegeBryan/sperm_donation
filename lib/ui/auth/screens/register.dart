@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sperm_donation/ui/auth/parts/form_bottom_text.dart';
 import 'package:sperm_donation/ui/auth/parts/register_form.dart';
-import 'package:sperm_donation/ui/auth/screens/login.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -23,7 +22,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               FormBottomText(
                 message: 'Already have an account?',
                 actionMessage: 'Login',
-                action: LoginScreen(),
+                action: () {
+                  Navigator.pushReplacementNamed(context, '/login');
+                },
               ),
             ],
           ),
