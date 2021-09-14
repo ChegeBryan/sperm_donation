@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:sperm_donation/services/auth.dart';
+import 'package:sperm_donation/services/user.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -9,6 +12,8 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  Map<String, dynamic> errors = {};
+
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _email = TextEditingController();
@@ -16,6 +21,8 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context);
+
     return Form(
       key: _formKey,
       child: Column(
@@ -56,7 +63,33 @@ class _LoginFormState extends State<LoginForm> {
           Container(
             width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+
+                  final Future<Map<String, dynamic>> userLogin =
+                      auth.login(_email.text, _password.text);
+
+                  userLogin.then((response) {
+                    if (response['status']) {
+                      Provider.of<UserProvider>(context, listen: false)
+                          .setUser(response['user']);
+                      Navigator.pushReplacementNamed(context, '/dashboard');
+                    } else {
+                      Map<String, dynamic> responseErrors = {};
+                      var errorFields = response['message']['data'].keys;
+
+                      for (var errorField in errorFields) {
+                        responseErrors.putIfAbsent(errorField,
+                            () => response['message']['data'][errorField]);
+                      }
+                      setState(() {
+                        errors = responseErrors;
+                      });
+                    }
+                  });
+                }
+              },
               child: Text(
                 'Login',
                 style: TextStyle(
