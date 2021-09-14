@@ -9,4 +9,6 @@ class BackendUrl {
   // manage sperm banks
   static const String addSpermBank = baseUrl + '/addSpermBank.php';
   static const String getSpermBanks = baseUrl + '/getSpermBanks.php';
+  static const String delelteSpermBank = baseUrl + '/deleteSpermBank.php';
+  static const String delelteSpermBank = baseUrl + '/updateSpermBank.php';
 }

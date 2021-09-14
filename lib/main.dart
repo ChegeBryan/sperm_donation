@@ -15,9 +15,9 @@ void main() {
   runApp(MyApp());
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  Future<User> _userPreferences = UserPrefences().getUser();
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +33,13 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: FutureBuilder(
-          future: _userPreferences,
+          future: UserPrefences().getUser(),
           builder: (context, AsyncSnapshot<User> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.data!.email == null) {
                 return LoginScreen();
               }
-              Provider.of<UserProvider>(context, listen: false)
-                  .setUser(snapshot.data);
+              Provider.of<UserProvider>(context).setUser(snapshot.data);
               return AdminDashboard();
             }
             return Center(
