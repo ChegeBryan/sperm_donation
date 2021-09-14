@@ -38,4 +38,19 @@ class SpermBankProvider with ChangeNotifier {
     }
     return result;
   }
+
+  Future<Map<String, dynamic>> getSpermBanks() async {
+    var result;
+
+    Response res = await get(Uri.parse(BackendUrl.getSpermBanks));
+
+    final Map<String, dynamic> responseData = jsonDecode(res.body);
+
+    if (!responseData['error']) {
+      result = {'status': true, 'data': responseData['data']};
+    } else {
+      result = {'status': false, 'message': responseData['message']};
+    }
+    return result;
+  }
 }
