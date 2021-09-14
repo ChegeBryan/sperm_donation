@@ -8,6 +8,7 @@ import 'package:sperm_donation/ui/auth/screens/login.dart';
 import 'package:sperm_donation/ui/auth/screens/register.dart';
 import 'package:sperm_donation/ui/screens/add_sperm_bank_screen.dart';
 import 'package:sperm_donation/ui/screens/dashboard.dart';
+import 'package:sperm_donation/ui/screens/edit_sperm_bank.dart';
 import 'package:sperm_donation/ui/screens/sperm_banks_list.dart';
 import 'package:sperm_donation/util/shared_preferences.dart';
 
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
           '/dashboard': (context) => AdminDashboard(),
           '/spermBanks': (context) => SpermBanksList(),
           '/addSpermBank': (context) => AddSpermBankScreen(),
+          '/editSpermBank': (context) => EditSpermBankScreen(),
         },
       ),
     );

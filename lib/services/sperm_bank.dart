@@ -82,7 +82,7 @@ class SpermBankProvider with ChangeNotifier {
       _actionStatus = Status.Completed;
       notifyListeners();
       result = {'status': true, 'message': 'Successfully updated sperm bank.'};
-    } else if (responseData['data']) {
+    } else if (responseData['data'] != null) {
       _actionStatus = Status.Failed;
       notifyListeners();
       result = {

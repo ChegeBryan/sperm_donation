@@ -41,7 +41,18 @@ class _SpermBanksListState extends State<SpermBanksList> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/editSpermBank',
+                            arguments: {
+                              'name': snapshot.data!['data'][index]['name'],
+                              'location': snapshot.data!['data'][index]
+                                  ['location'],
+                              'id': snapshot.data!['data'][index]['id'],
+                            },
+                          );
+                        },
                         icon: Icon(Icons.edit),
                       ),
                       IconButton(
