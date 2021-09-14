@@ -27,14 +27,15 @@ class AuthProvider with ChangeNotifier {
 
     Response res = await post(
       Uri.parse(BackendUrl.login),
-      body: jsonEncode(data),
-      headers: {'Content-Type': 'application/json'},
+      body: data,
     );
 
     final Map<String, dynamic> responseData = jsonDecode(res.body);
 
+    print(responseData);
+
     if (!responseData['error']) {
-      User authUser = User.fromJson(responseData);
+      User authUser = User.fromJson(responseData['data']);
 
       // persist user on app.
       UserPrefences().saveUser(authUser);
