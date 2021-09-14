@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sperm_donation/services/auth.dart';
+import 'package:sperm_donation/services/user.dart';
 import 'package:validators/validators.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -9,6 +12,8 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  Map<String, dynamic> errors = {};
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
@@ -16,6 +21,8 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context);
+
     return Form(
       key: _formKey,
       child: Column(
@@ -36,10 +43,15 @@ class _RegisterFormState extends State<RegisterForm> {
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Please enter email';
-                  } else if (isEmail(value)) {
+                  } else if (!isEmail(value)) {
                     return 'Provide a valid email';
+                  } else if (errors.containsKey('email_error')) {
+                    return errors['email_error'];
                   }
                   return null;
+                },
+                onChanged: (value) {
+                  errors.remove('email_error');
                 },
               ),
               Padding(padding: const EdgeInsets.all(8.0)),
@@ -57,8 +69,15 @@ class _RegisterFormState extends State<RegisterForm> {
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Please provide a password';
+                  } else if (value.length < 8) {
+                    return 'Password cannot be less than 8 Characters';
+                  } else if (errors.containsKey('password_error')) {
+                    return errors['password_error'];
                   }
                   return null;
+                },
+                onChanged: (value) {
+                  errors.remove('password_error');
                 },
               ),
               Padding(padding: const EdgeInsets.all(8.0)),
@@ -84,7 +103,33 @@ class _RegisterFormState extends State<RegisterForm> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+
+                      final Future<Map<String, dynamic>> successMessage =
+                          auth.register(_email.text, _password.text);
+
+                      successMessage.then((response) {
+                        if (response['status']) {
+                          Provider.of<UserProvider>(context, listen: false)
+                              .setUser(response['user']);
+                          Navigator.pushReplacementNamed(context, '/login');
+                        } else {
+                          Map<String, dynamic> responseErrors = {};
+                          var errorFields = response['message']['data'].keys;
+
+                          for (var errorField in errorFields) {
+                            responseErrors.putIfAbsent(errorField,
+                                () => response['message']['data'][errorField]);
+                          }
+                          setState(() {
+                            errors = responseErrors;
+                          });
+                        }
+                      });
+                    }
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
