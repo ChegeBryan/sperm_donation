@@ -34,7 +34,11 @@ class SpermBankProvider with ChangeNotifier {
     } else {
       _actionStatus = Status.Failed;
       notifyListeners();
-      result = {'status': true, 'message': 'Failed to add sperm bank.'};
+      result = {
+        'status': false,
+        'message': 'Failed to add sperm bank.',
+        'error': responseData['data']
+      };
     }
     return result;
   }

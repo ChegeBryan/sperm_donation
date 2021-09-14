@@ -46,8 +46,11 @@ class _SpermBanksListState extends State<SpermBanksList> {
           );
         },
       ),
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/addSpermBank');
+          },
+          child: Icon(Icons.add)),
     );
   }
 }
