@@ -59,8 +59,7 @@ class SpermBankProvider with ChangeNotifier {
   }
 
 
-  Future<Map<String, dynamic>> updateSpermBank(int id,
-      String name, String location) async {
+  Future<Map<String, dynamic>> updateSpermBank(int id, String name, String location) async {
     var result;
 
     final Map<String, dynamic> data = {'id': id, 'name': name, 'location': location};
@@ -79,13 +78,20 @@ class SpermBankProvider with ChangeNotifier {
       _actionStatus = Status.Completed;
       notifyListeners();
       result = {'status': true, 'message': 'Successfully updated sperm bank.'};
-    } else {
+    } else if(responseData['data']) {
       _actionStatus = Status.Failed;
       notifyListeners();
       result = {
         'status': false,
         'message': 'Failed to update sperm bank.',
         'error': responseData['data']
+      };
+    } else {
+      _actionStatus = Status.Failed;
+      notifyListeners();
+      result = {
+        'status': false,
+        'message': 'Failed to update sperm bank.',
       };
     }
     return result;
@@ -95,7 +101,7 @@ class SpermBankProvider with ChangeNotifier {
      var result;
 
      final Map<String, dynamic> data = {'id': id};
-     
+
      Response res = await post(Uri.parse(BackendUrl.deleteSpermBank, body:data))
 
      if(!responseData['error']) {
