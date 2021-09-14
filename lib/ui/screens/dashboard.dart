@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sperm_donation/util/shared_preferences.dart';
 
 class AdminDashboard extends StatelessWidget {
   const AdminDashboard({Key? key}) : super(key: key);
@@ -9,6 +10,21 @@ class AdminDashboard extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Dashboard'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // clear user data from local storage
+              UserPrefences().removeUser().then(
+                    (value) => Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      '/login',
+                      (Route<dynamic> route) => false,
+                    ),
+                  );
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
       body: ListView(
         children: [
