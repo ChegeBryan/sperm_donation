@@ -5,4 +5,7 @@ class BackendUrl {
   // auth URLs
   static const String login = baseUrl + '/auth/login.php';
   static const String register = baseUrl + '/auth/register.php';
+
+  // manage sperm banks
+  static const String addSpermBank = baseUrl + '/addSpermBank.php';
 }
