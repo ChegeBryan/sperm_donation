@@ -12,6 +12,8 @@ class SpermBanksList extends StatefulWidget {
 class _SpermBanksListState extends State<SpermBanksList> {
   @override
   Widget build(BuildContext context) {
+    SpermBankProvider manageSpermBank = Provider.of<SpermBankProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Sperm banks'),
@@ -32,10 +34,47 @@ class _SpermBanksListState extends State<SpermBanksList> {
             }
             return ListView.separated(
               itemBuilder: (BuildContext context, int index) => ListTile(
-                title: Text(snapshot.data!['data'][index]['name']),
-                subtitle: Text(snapshot.data!['data'][index]['location']),
-                onTap: () {},
-              ),
+                  title: Text(snapshot.data!['data'][index]['name']),
+                  subtitle: Text(snapshot.data!['data'][index]['location']),
+                  onTap: () {},
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.edit),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          final Future<Map<String, dynamic>> deleteSpermBank =
+                              manageSpermBank.deleteSpermBank(
+                                  snapshot.data!['data'][index]['id']);
+
+                          deleteSpermBank.then((response) {
+                            if (response['status']) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(response['message']),
+                                  duration: const Duration(seconds: 2),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                              setState(() {});
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(response['message']),
+                                  duration: const Duration(seconds: 2),
+                                  backgroundColor: Colors.redAccent,
+                                ),
+                              );
+                            }
+                          });
+                        },
+                        icon: Icon(Icons.delete_forever),
+                      )
+                    ],
+                  )),
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(),
               itemCount: snapshot.data!['data'].length,
