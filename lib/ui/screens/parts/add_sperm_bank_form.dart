@@ -16,6 +16,14 @@ class _AddSpermBankFormState extends State<AddSpermBankForm> {
 
   final TextEditingController _name = TextEditingController();
   final TextEditingController _location = TextEditingController();
+
+  @override
+  void dispose() {
+    _name.dispose();
+    _location.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     SpermBankProvider manageSpermBank = Provider.of<SpermBankProvider>(context);
@@ -91,6 +99,8 @@ class _AddSpermBankFormState extends State<AddSpermBankForm> {
                         duration: const Duration(seconds: 2),
                         backgroundColor: Colors.green,
                       ));
+                      _name.clear();
+                      _location.clear();
                       _formKey.currentState!.reset();
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
