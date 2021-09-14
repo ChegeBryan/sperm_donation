@@ -114,7 +114,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         if (response['status']) {
                           Provider.of<UserProvider>(context, listen: false)
                               .setUser(response['user']);
-                          Navigator.pushReplacementNamed(context, '/login');
+                          Navigator.pushReplacementNamed(context, '/dashboard');
                         } else {
                           Map<String, dynamic> responseErrors = {};
                           var errorFields = response['message']['data'].keys;
